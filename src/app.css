@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root{
+    --color-primary-01: #F08318;
+    --color-primary-02: #F8AD34;
+    --color-secondary-01: #0199A3;
+    --color-secondary-02: #017179;
+    --background-gray: #F6F6F6;
+    --color-neutro: #5F5B5B;
+}
+
+/* ----- RESET CODE ------ */
+* {
+    font-family: "Montserrat", sans-serif;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+/* ----- END OF RESET CODE ------ */
+
+.custom-primary-btn{
+    background-color: var(--color-primary-01) !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 16px 25px !important;
+    color: white;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+}
+
+.custom-secondary-btn{
+    border: 1px solid var(--color-primary-01) !important; 
+    color: var(--color-primary-01) !important;
+    border-radius: 8px !important;
+    padding: 16px 25px !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+}
+
+input:not([type="checkbox"]):not([type="radio"]){
+    background-color: var(--background-gray);
+    border-radius: 10px;
+    border: none;
+}
+
+.neutro-input::placeholder{
+    color: #5F5B5B !important;
+}
+
+.box-shadow-none{
+    box-shadow: none;
+}
+
+.fs-7{
+    font-size: 14px;
+}
+
+.fs-8{
+    font-size: 12px;
+}
