@@ -50,6 +50,9 @@ const ProtectiveRegister = () => {
     if (!formData.password) {
       newErrors.password = 'El campo contraseña es requerido';
     }
+    if (!formData.password) {
+      newErrors.confirmarPassword = 'El campo confirmar contraseña es requerido';
+    }
     if (formData.password !== formData.confirmarPassword) {
       newErrors.confirmarPassword = 'Las contraseñas no coinciden';
     }

@@ -1,27 +1,40 @@
 import React, { useState } from 'react';
 import ProtectiveRegister from '../components/ProtectiveRegister/ProtectiveRegister';
 
-const Register = () => {
-  const [tipoUsuario, setTipoUsuario] = useState('');
+function Register() {
+  const [tipoUsuario, setTipoUsuario] = useState(""); // Estado para almacenar el tipo de usuario seleccionado
 
-  const handleSelectChange = (e) => {
-    setTipoUsuario(e.target.value);
+  const handleUserSelection = (tipo) => {
+    setTipoUsuario(tipo); // Establece el tipo de usuario cuando el usuario selecciona una opción
   };
 
   return (
-    <div>
-      <h2>Registro de Usuario</h2>
-      <label htmlFor="tipoUsuario">Elige tu tipo de usuario:</label>
-      <select id="tipoUsuario" onChange={handleSelectChange}>
-        <option value="">Selecciona</option>
-        <option value="protectora">Protectora</option>
-        <option value="mascotero">Mascotero</option>
-      </select>
+    <div className="container mt-5">
+      {tipoUsuario === "" && (
+        <div className="d-flex justify-content-center">
+          <div>
+            <h2>Seleccione su tipo de usuario</h2>
+            <button
+              className="btn btn-primary m-2"
+              onClick={() => handleUserSelection("protectora")}
+            >
+              Protectora
+            </button>
+            <button
+              className="btn btn-secondary m-2"
+              onClick={() => handleUserSelection("mascotero")}
+            >
+              Mascotero
+            </button>
+          </div>
+        </div>
+      )}
 
-      {tipoUsuario === 'protectora' && <ProtectiveRegister />}
-      {tipoUsuario === 'mascotero' && <p>Formulario para mascotero pendiente de implementar</p>}
+      {/* Mostrar el componente según el tipo de usuario seleccionado */}
+      {tipoUsuario === "protectora" && <ProtectiveRegister />}
+      {tipoUsuario === "mascotero" && <MascoteroRegister />}
     </div>
   );
-};
+}
 
 export default Register;
