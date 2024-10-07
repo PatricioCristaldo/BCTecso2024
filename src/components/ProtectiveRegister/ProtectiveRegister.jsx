@@ -18,6 +18,9 @@ const ProtectiveRegister = () => {
 
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false); // Controlar visibilidad de contraseña
+  const [loading, setLoading] = useState(false);  // Estado para gestionar el loading
+  const [successMessage, setSuccessMessage] = useState('');  // Mensaje de éxito o error
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e) => {
     setFormData({
@@ -61,14 +64,60 @@ const ProtectiveRegister = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (validateForm()) {
-      // Aquí va la lógica para enviar el formulario si es válido
-      console.log('Formulario enviado correctamente');
-    } else {
-      console.log('Errores en el formulario');
+      setLoading(true);  // Activar loading
+      setSuccessMessage('');
+      setErrorMessage('');
+
+      // Preparar los datos para enviar
+      const dataToSend = {
+        nombreProtectora: formData.nombreProtectora,
+        descripcion: formData.descripcion,
+        email: formData.email,
+        password: formData.password,
+        direccion: {
+          ciudad: formData.ciudad,
+          calle: formData.calle
+        }
+      };
+
+      try {
+        const response = await fetch('http://localhost:8081/api/protectoras/registro', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(dataToSend),
+        });
+
+        if (response.ok) {
+          // Si el registro fue exitoso
+          setSuccessMessage('Registro exitoso. Por favor, confirma tu correo.');
+          setFormData({
+            nombreProtectora: '',
+            descripcion: '',
+            email: '',
+            password: '',
+            confirmarPassword: '',
+            ciudad: '',
+            calle: ''
+          });
+        } else if (response.status === 409) {
+          // Si el email ya existe (error 409)
+          setErrorMessage('El email ya está registrado. Por favor, inicia sesión.');
+        } else {
+          // Otros errores
+          setErrorMessage('Error al registrar. Intenta de nuevo.');
+        }
+      } catch (error) {
+        // Errores de red o servidor
+        setErrorMessage('Error de conexión. Intenta de nuevo más tarde.');
+      } finally {
+        setLoading(false);  // Desactivar loading
+      }
     }
   };
 
