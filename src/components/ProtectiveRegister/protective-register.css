@@ -1,0 +1,119 @@
+/* ProtectiveRegister.css */
+
+.protective-register-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #fff;
+  }
+  
+  .protective-register-logo {
+    margin-bottom: 20px;
+  }
+  /* Estilo de los inputs */
+.protective-register-form input,
+.protective-register-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  transition: all 0.3s;
+  color: black; /* Inicialmente negro */
+}
+
+.protective-register-form input.filled,
+.protective-register-form textarea.filled {
+  color: #FF6A00; /* Cambia a naranja cuando el campo está lleno */
+}
+  .protective-register-form {
+    width: 90%;
+    max-width: 400px;
+  }
+  
+  .protective-register-form label {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 8px;
+    display: block;
+  }
+  
+  .protective-register-form input,
+  .protective-register-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #F6F6F6;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+    color: black; /* Texto color naranja */
+  }
+  
+  .protective-register-form input::placeholder,
+  .protective-register-form textarea::placeholder {
+    color: #017179; /* Placeholder en color naranja */
+  }
+  
+  .protective-register-form input:focus,
+  .protective-register-form textarea:focus {
+    border-color: #F08318 ; /* Borde naranja al enfocar */
+  }
+  
+  .protective-register-form input[type="password"] {
+    padding-right: 40px; /* Espacio para el ícono */
+  }
+  
+  .icon-password-toggle {
+    position: relative;
+  }
+  
+  .icon-password-toggle img {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #F08318; /* Ícono de color naranja */
+  }
+  
+  .button-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: #F08318; /* Botón de color naranja */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .button-submit:hover {
+    background-color: #e06600;
+  }
+  
+  .error {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: -12px;
+    margin-bottom: 12px;
+  }
+  
+  /* Estilos para los campos con errores */
+.protective-register-form .error-input {
+  border-color: red; /* Borde rojo para los campos con error */
+}
+
+.protective-register-form .error-message {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  display: block;
+}
