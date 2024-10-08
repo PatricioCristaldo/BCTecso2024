@@ -1,0 +1,8 @@
+.text-gray{
+    color: var(--text-gray) !important;
+}
+
+.starter-image{
+    width: 250px;
+    height: 393.29px;
+}
