@@ -1,0 +1,15 @@
+.onboarding-btn{
+    width: 198px !important;
+    height: 50px !important;
+}
+
+.omit-link{
+    color: var(--color-secondary-01) !important;
+    background-color: white !important;
+    font-weight: 500;
+}
+
+.stepper-btn{
+    width: 15px;
+    height: 5px;
+}

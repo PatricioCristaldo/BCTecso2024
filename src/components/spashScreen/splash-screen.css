@@ -1,0 +1,36 @@
+.splash-screen {
+  background-color: var(--color-primary-03);
+}
+
+.isologo {
+  width: 300px;
+}
+
+.paw-prints-container{
+    position: relative;
+}
+
+.paw-prints:nth-child(1){
+    position: absolute;
+    top: 50px;
+    left: 24px ;
+}
+
+
+.paw-prints:nth-child(2){
+    position: absolute;
+    top: 25px;
+    left: 50px;
+}
+
+.paw-prints:nth-child(3){
+    position: absolute;
+    top: 25px;
+    left: 100px;
+}
+
+.paw-prints:nth-child(4){
+    position: absolute;
+    top: 25px;
+    left: 150px;
+}
