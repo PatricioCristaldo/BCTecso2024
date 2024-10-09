@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import "../../App.css"
+import React, { useState, useEffect } from 'react';
+import "../../App.css";
 import './protective-register.css'; // Importar los estilos
-import isologo from "../../assets/isologo.svg"
+import isologo from "../../assets/isologo.svg";
 import eyeIcon from '../../assets/eyeIcon.svg';  // Icono para mostrar contraseña
 import eyeSlashIcon from '../../assets/eyeSlashIcon.svg';  // Icono para ocultar contraseña
+import axios from "axios";
+
 
 const ProtectiveRegister = () => {
   const [formData, setFormData] = useState({
@@ -13,21 +15,47 @@ const ProtectiveRegister = () => {
     password: '',
     confirmarPassword: '',
     ciudad: '',
-    calle: ''
+    calle: '',
+    provincia: '', // Nuevo campo para provincia
   });
 
+  const [provincias, setProvincias] = useState([]); // Estado para almacenar las provincias
+  const [ciudades, setCiudades] = useState([]);  // Estado para almacenar las ciudades basadas en la provincia seleccionada
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false); // Controlar visibilidad de contraseña
   const [loading, setLoading] = useState(false);  // Estado para gestionar el loading
   const [successMessage, setSuccessMessage] = useState('');  // Mensaje de éxito o error
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  useEffect(() => {
+    // Llamada a la API para obtener las provincias cuando el componente se monta
+    axios.get('http://localhost:8081/api/combos/Provincias')
+      .then((response) => {
+        setProvincias(response.data); // Guardar las provincias en el estado
+      })
+      .catch((error) => {
+        console.error('Error al obtener provincias:', error);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (formData.provincia) {  // Solo hacer la llamada si hay una provincia seleccionada
+      axios.get(`http://localhost:8081/api/combos/Ciudades/${formData.provincia}`)
+        .then((response) => {
+          setCiudades(response.data);  // Guardar las ciudades en el estado
+        })
+        .catch((error) => {
+          console.error('Error al obtener ciudades:', error);
+        });
+    }
+  }, [formData.provincia]);
+
+const handleChange = (e) => {
+  setFormData({
+    ...formData,
+    [e.target.name]: e.target.value
+  });
+};
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -62,10 +90,14 @@ const ProtectiveRegister = () => {
     if (!formData.calle) {
       newErrors.calle = 'El campo calle es requerido';
     }
+    if (!formData.provincia) {
+      newErrors.provincia = 'El campo provincia es requerido';
+    }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -83,38 +115,34 @@ const ProtectiveRegister = () => {
         password: formData.password,
         direccion: {
           ciudad: formData.ciudad,
-          calle: formData.calle
+          calle: formData.calle,
+          provincia: formData.provincia, // Incluir la provincia seleccionada
         }
       };
 
       try {
-        const response = await fetch('http://localhost:8081/api/protectoras/registro', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(dataToSend),
+        console.log(dataToSend);
+        axios.post("http://localhost:8081/api/protectoras/registro", { dataToSend })
+          .then((response) => {
+            console.log("Response:", response.data?.token);
+            navigate("/home");
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+
+        setSuccessMessage('Registro exitoso. Por favor, confirma tu correo.');
+        setFormData({
+          nombreProtectora: '',
+          descripcion: '',
+          email: '',
+          password: '',
+          confirmarPassword: '',
+          ciudad: '',
+          calle: '',
+          provincia: '',
         });
 
-        if (response.ok) {
-          // Si el registro fue exitoso
-          setSuccessMessage('Registro exitoso. Por favor, confirma tu correo.');
-          setFormData({
-            nombreProtectora: '',
-            descripcion: '',
-            email: '',
-            password: '',
-            confirmarPassword: '',
-            ciudad: '',
-            calle: ''
-          });
-        } else if (response.status === 409) {
-          // Si el email ya existe (error 409)
-          setErrorMessage('El email ya está registrado. Por favor, inicia sesión.');
-        } else {
-          // Otros errores
-          setErrorMessage('Error al registrar. Intenta de nuevo.');
-        }
       } catch (error) {
         // Errores de red o servidor
         setErrorMessage('Error de conexión. Intenta de nuevo más tarde.');
@@ -210,18 +238,43 @@ const ProtectiveRegister = () => {
         </div>
 
         <div>
-          <input
-            type="text"
-            name="ciudad"
-            placeholder="Ciudad*"
-            value={formData.ciudad}
-            onChange={handleChange}
-            className={`${errors.ciudad ? 'error-input' : ''} ${formData.ciudad ? 'filled' : ''}`}
-          />
-          {errors.ciudad && (
-            <span className="error-message">{errors.ciudad}</span>
-          )}
-        </div>
+  <select
+    name="provincia"
+    value={formData.provincia}
+    onChange={handleChange}
+    className={`${errors.provincia ? 'error-input' : ''} ${formData.provincia ? 'filled' : ''}`}
+  >
+    <option value="">Seleccione una provincia*</option>
+    {provincias.map((provincia) => (
+      <option key={provincia.id} value={provincia.id}>
+        {provincia.nombre}
+      </option>
+    ))}
+  </select>
+  {errors.provincia && (
+    <span className="error-message">{errors.provincia}</span>
+  )}
+</div>
+
+<div>
+  <select
+    name="ciudad"
+    value={formData.ciudad}
+    onChange={handleChange}
+    className={`${errors.ciudad ? 'error-input' : ''} ${formData.ciudad ? 'filled' : ''}`}
+    disabled={!formData.provincia}
+  >
+    <option value="">Seleccione una ciudad*</option>
+    {ciudades.map((ciudad) => (
+      <option key={ciudad.id} value={ciudad.nombre}>
+        {ciudad.nombre}
+      </option>
+    ))}
+  </select>
+  {errors.ciudad && (
+    <span className="error-message">{errors.ciudad}</span>
+  )}
+</div>
 
         <div>
           <input

@@ -27,7 +27,7 @@
 
 .protective-register-form input.filled,
 .protective-register-form textarea.filled {
-  color: #FF6A00; /* Cambia a naranja cuando el campo está lleno */
+  color: #F08318; /* Cambia a naranja cuando el campo está lleno */
 }
   .protective-register-form {
     width: 90%;
@@ -52,7 +52,7 @@
     font-size: 1rem;
     outline: none;
     transition: border-color 0.3s;
-    color: black; /* Texto color naranja */
+    color: #F08318; /* Texto color naranja */
   }
   
   .protective-register-form input::placeholder,
@@ -95,7 +95,7 @@
   }
   
   .button-submit:hover {
-    background-color: #e06600;
+    background-color: #F08318;
   }
   
   .error {
@@ -116,4 +116,35 @@
   margin-top: -10px;
   margin-bottom: 10px;
   display: block;
+}
+
+select {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px !important;
+  font-size: 16px;
+  color: #017179;
+  background-color: #F6F6F6;  /* El color de fondo oscuro */
+  border: 2px solid #F6F6F6;  /* Borde gris oscuro similar a los inputs */
+  border-radius: 8px;  /* Mismo borde redondeado */
+  box-sizing: border-box;
+}
+
+select.filled {
+  background-color: #F6F6F6; /* El fondo cuando hay un valor */
+  color: #F08318
+}
+
+select.error-input {
+  border: 2px solid red; /* Borde rojo en caso de error */
+}
+
+select:focus {
+  color: #F08318;
+  border-color: #F08318;  /* Cambiar color al enfocar */
+  outline: none;
+}
+
+select option {
+  color: black;  /* Para que las opciones del dropdown tengan color de texto negro */
 }
