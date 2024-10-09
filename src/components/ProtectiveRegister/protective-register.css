@@ -148,3 +148,16 @@ select:focus {
 select option {
   color: black;  /* Para que las opciones del dropdown tengan color de texto negro */
 }
+.row-fields {
+  display: flex;
+  justify-content: space-between; /* Distribuye los campos uniformemente */
+  gap: 10px; /* Añade un espacio entre los campos */
+}
+
+.input-group {
+  flex: 1; /* Permite que los campos ocupen el mismo espacio */
+}
+
+input {
+  width: 100%; /* Asegura que los inputs ocupen el ancho disponible */
+}

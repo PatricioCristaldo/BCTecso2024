@@ -14,10 +14,17 @@ const ProtectiveRegister = () => {
     email: '',
     password: '',
     confirmarPassword: '',
+    provincia: '',
     ciudad: '',
     calle: '',
-    provincia: '', // Nuevo campo para provincia
+    numero: '',
+    piso: '',
+    departamento: '',
+    sitioWeb: '',
+    instagram: '',
+    facebook: ''
   });
+  
 
   const [provincias, setProvincias] = useState([]); // Estado para almacenar las provincias
   const [ciudades, setCiudades] = useState([]);  // Estado para almacenar las ciudades basadas en la provincia seleccionada
@@ -107,18 +114,24 @@ const handleChange = (e) => {
       setSuccessMessage('');
       setErrorMessage('');
 
-      // Preparar los datos para enviar
       const dataToSend = {
         nombreProtectora: formData.nombreProtectora,
         descripcion: formData.descripcion,
         email: formData.email,
         password: formData.password,
         direccion: {
+          provincia: formData.provincia,
           ciudad: formData.ciudad,
           calle: formData.calle,
-          provincia: formData.provincia, // Incluir la provincia seleccionada
-        }
+          numero: formData.numero || '',  
+          piso: formData.piso || '',      
+          departamento: formData.departamento || '' 
+        },
+        sitioWeb: formData.sitioWeb || '',  
+        instagram: formData.instagram || '',  
+        facebook: formData.facebook || ''  
       };
+      
 
       try {
         console.log(dataToSend);
@@ -289,7 +302,75 @@ const handleChange = (e) => {
             <span className="error-message">{errors.calle}</span>
           )}
         </div>
+        <div className="row-fields">
+  <div className="input-group">
+    <input
+      type="text"
+      name="numero"
+      placeholder="Número"
+      value={formData.numero}
+      onChange={handleChange}
+      className={`${formData.numero ? 'filled' : ''}`}
+    />
+  </div>
 
+  <div className="input-group">
+    <input
+      type="text"
+      name="piso"
+      placeholder="Piso"
+      value={formData.piso}
+      onChange={handleChange}
+      className={`${formData.piso ? 'filled' : ''}`}
+    />
+  </div>
+</div>
+
+
+
+  <div className="input-group">
+    <input
+      type="text"
+      name="departamento"
+      placeholder="Departamento"
+      value={formData.departamento}
+      onChange={handleChange}
+      className={`${formData.departamento ? 'filled' : ''}`}
+    />
+  </div>
+
+  <div className="input-group">
+    <input
+      type="url"
+      name="sitioWeb"
+      placeholder="Sitio web"
+      value={formData.sitioWeb}
+      onChange={handleChange}
+      className={`${formData.sitioWeb ? 'filled' : ''}`}
+    />
+  </div>
+
+  <div className="input-group">
+    <input
+      type="url"
+      name="instagram"
+      placeholder="Instagram"
+      value={formData.instagram}
+      onChange={handleChange}
+      className={`${formData.instagram ? 'filled' : ''}`}
+    />
+  </div>
+
+  <div className="input-group">
+    <input
+      type="url"
+      name="facebook"
+      placeholder="Facebook"
+      value={formData.facebook}
+      onChange={handleChange}
+      className={`${formData.facebook ? 'filled' : ''}`}
+    />
+  </div>
         <button type="submit" className="button-submit">
           Registrar
         </button>
