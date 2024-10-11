@@ -9,20 +9,33 @@ import axios from "axios";
 
 const ProtectiveRegister = () => {
   const [formData, setFormData] = useState({
-    nombreProtectora: '',
-    descripcion: '',
     email: '',
     password: '',
-    confirmarPassword: '',
-    provincia: '',
-    ciudad: '',
-    calle: '',
-    numero: '',
-    piso: '',
-    departamento: '',
+    confirmarPassword: '', 
+    nombreUsuario: '',
+    apellidoUsuario: '',
+    nombreProtectora: '',
+    descripcion: '',
     sitioWeb: '',
     instagram: '',
-    facebook: ''
+    facebook: '',
+    cantidadDeMascotas: 0,
+    direccion: {
+      idCiudad: '',
+      calle: '',
+      numero: '',
+      piso: '',
+      departamento: '',
+      provincia: {
+        id: '',
+        nombre: ''
+      },
+      ciudad: {
+        id: '',
+        nombre: '',
+        idProvincia: ''
+      }
+    }
   });
   
 
@@ -106,64 +119,54 @@ const handleChange = (e) => {
   };
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (validateForm()) {
-      setLoading(true);  // Activar loading
-      setSuccessMessage('');
-      setErrorMessage('');
-
-      const dataToSend = {
-        nombreProtectora: formData.nombreProtectora,
-        descripcion: formData.descripcion,
-        email: formData.email,
-        password: formData.password,
-        direccion: {
-          provincia: formData.provincia,
-          ciudad: formData.ciudad,
-          calle: formData.calle,
-          numero: formData.numero || '',  
-          piso: formData.piso || '',      
-          departamento: formData.departamento || '' 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  
+    // Construir el objeto registerData desde formData
+    const registerData = {
+      email: formData.email || "",
+      password: formData.password || "",
+      nombreUsuario: formData.nombreUsuario || "vacío",
+      apellidoUsuario: formData.apellidoUsuario || "vacío",
+      nombreProtectora: formData.nombreProtectora || "",
+      descripcion: formData.descripcion || "",
+      cantidadDeMascotas: formData.cantidadDeMascotas || 0,
+      direccion: {
+        calle: formData.direccion.calle || "",
+        numero: formData.direccion.numero || "",
+        piso: formData.direccion.piso || "",
+        departamento: formData.direccion.departamento || "",
+        ciudad: {
+          id: formData.direccion.ciudad.id || 0,
+          nombre: formData.direccion.ciudad.nombre || "",
+          idProvincia: formData.direccion.ciudad.idProvincia || 0
         },
-        sitioWeb: formData.sitioWeb || '',  
-        instagram: formData.instagram || '',  
-        facebook: formData.facebook || ''  
-      };
-      
+        provincia: {
+          id: formData.direccion.provincia.id || 0,
+          nombre: formData.direccion.provincia.nombre || ""
+        }
+      },
+      sitioWeb: formData.sitioWeb || "vacío",
+      instagram: formData.instagram || "vacío",
+      facebook: formData.facebook || "vacío"
+    };
+    console.log("Datos enviados:", registerData);
 
-      try {
-        console.log(dataToSend);
-        axios.post("http://localhost:8081/api/protectoras/registro", { dataToSend })
-          .then((response) => {
-            console.log("Response:", response.data?.token);
-            navigate("/home");
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-
-        setSuccessMessage('Registro exitoso. Por favor, confirma tu correo.');
-        setFormData({
-          nombreProtectora: '',
-          descripcion: '',
-          email: '',
-          password: '',
-          confirmarPassword: '',
-          ciudad: '',
-          calle: '',
-          provincia: '',
-        });
-
-      } catch (error) {
-        // Errores de red o servidor
-        setErrorMessage('Error de conexión. Intenta de nuevo más tarde.');
-      } finally {
-        setLoading(false);  // Desactivar loading
-      }
-    }
+    axios.post('http://localhost:8081/api/Protectoras/registro', registerData)
+      .then(response => {
+        console.log('Registro exitoso', response.data);
+        setSuccessMessage('Registro exitoso');
+        setErrorMessage('');
+      })
+      .catch(error => {
+        console.error('Error al registrar', error);
+        setErrorMessage('Error al registrar la protectora');
+        setSuccessMessage('');
+      });
   };
+  
+  
+  
 
   return (
     <div className="protective-register-container">
