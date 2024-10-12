@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import "../../App.css";
 import './protective-register.css'; // Importar los estilos
-import isologo from "../../assets/isologo.svg";
-import eyeIcon from '../../assets/eyeIcon.svg';  // Icono para mostrar contraseña
-import eyeSlashIcon from '../../assets/eyeSlashIcon.svg';  // Icono para ocultar contraseña
+import isologo from "../../assets/Icons/isologo.svg";
+import eyeIcon from '../../assets/Icons/eyeIcon.svg';  // Icono para mostrar contraseña
+import eyeSlashIcon from '../../assets/Icons/eyeSlashIcon.svg';  // Icono para ocultar contraseña
 import axios from "axios";
 
 
