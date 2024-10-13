@@ -5,7 +5,7 @@ import isologo from "../../assets/Icons/isologo.svg";
 import eyeIcon from '../../assets/Icons/eyeIcon.svg';  // Icono para mostrar contraseña
 import eyeSlashIcon from '../../assets/Icons/eyeSlashIcon.svg';  // Icono para ocultar contraseña
 import axios from "axios";
-
+import emailjs from 'emailjs-com';
 
 const ProtectiveRegister = () => {
   const [formData, setFormData] = useState({
@@ -104,20 +104,39 @@ const handleChange = (e) => {
     if (formData.password !== formData.confirmarPassword) {
       newErrors.confirmarPassword = 'Las contraseñas no coinciden';
     }
-    if (!formData.ciudad) {
-      newErrors.ciudad = 'El campo ciudad es requerido';
-    }
-    if (!formData.calle) {
-      newErrors.calle = 'El campo calle es requerido';
-    }
-    if (!formData.provincia) {
-      newErrors.provincia = 'El campo provincia es requerido';
-    }
+   // Validación de la dirección
+   if (!formData.direccion.calle) {
+    newErrors.calle = 'El campo calle es requerido';
+  }
+  if (!formData.direccion.numero) {
+    newErrors.numero = 'El campo número es requerido';
+  }
+  if (!formData.direccion.ciudad.id) {
+    newErrors.ciudad = 'El campo ciudad es requerido';
+  }
+  if (!formData.direccion.provincia.id) {
+    newErrors.provincia = 'El campo provincia es requerido';
+  }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+  setErrors(newErrors);
+  return Object.keys(newErrors).length === 0;
+};
+  
+  const sendEmail = (userEmail) => {
+    const templateParams = {
+      to_name: formData.nombreUsuario,  // Nombre del usuario que registró
+      to_email: userEmail,              // Email del usuario registrado
+      message: `Gracias por registrarte en nuestra plataforma, ${formData.nombreUsuario}. Tu registro ha sido exitoso.`
+    };
+  
+    emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams, 'YOUR_USER_ID')
+      .then((response) => {
+        console.log('Correo enviado con éxito:', response.status, response.text);
+      })
+      .catch((error) => {
+        console.error('Error al enviar el correo:', error);
+      });
   };
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -130,20 +149,21 @@ const handleChange = (e) => {
       apellidoUsuario: formData.apellidoUsuario || "vacío",
       nombreProtectora: formData.nombreProtectora || "",
       descripcion: formData.descripcion || "",
-      cantidadDeMascotas: formData.cantidadDeMascotas || 0,
+      cantidadDeMascotas: formData.cantidadDeMascotas || 1,
       direccion: {
-        calle: formData.direccion.calle || "",
-        numero: formData.direccion.numero || "",
-        piso: formData.direccion.piso || "",
-        departamento: formData.direccion.departamento || "",
+        idCiudad: formData.ciudad.idCiudad || 1 ,
+        calle: formData.calle || "",
+        numero: formData.numero || "",
+        piso: formData.piso || "",
+        departamento: formData.departamento || "",
         ciudad: {
-          id: formData.direccion.ciudad.id || 0,
-          nombre: formData.direccion.ciudad.nombre || "",
-          idProvincia: formData.direccion.ciudad.idProvincia || 0
+          id: formData.ciudad.id || 1,
+          nombre: formData.ciudad.nombre || "string",
+          idProvincia: formData.ciudad.idProvincia || 1
         },
         provincia: {
-          id: formData.direccion.provincia.id || 0,
-          nombre: formData.direccion.provincia.nombre || ""
+          id: formData.provincia.id || 1,
+          nombre: formData.provincia.nombre || "string"
         }
       },
       sitioWeb: formData.sitioWeb || "vacío",
@@ -152,17 +172,17 @@ const handleChange = (e) => {
     };
     console.log("Datos enviados:", registerData);
 
+
     axios.post('http://localhost:8081/api/Protectoras/registro', registerData)
-      .then(response => {
-        console.log('Registro exitoso', response.data);
-        setSuccessMessage('Registro exitoso');
-        setErrorMessage('');
-      })
-      .catch(error => {
-        console.error('Error al registrar', error);
-        setErrorMessage('Error al registrar la protectora');
-        setSuccessMessage('');
-      });
+    .then(response => {
+      console.log('Registro exitoso', response.data);
+
+      // Si el registro es exitoso, enviar el correo
+      sendEmail(formData.email);  // Llamar a la función para enviar el correo
+    })
+    .catch(error => {
+      console.error('Error al registrar', error);
+    });
   };
   
   
