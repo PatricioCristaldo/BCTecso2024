@@ -6,6 +6,8 @@ import eyeIcon from '../../assets/Icons/eyeIcon.svg';  // Icono para mostrar con
 import eyeSlashIcon from '../../assets/Icons/eyeSlashIcon.svg';  // Icono para ocultar contraseña
 import axios from "axios";
 import emailjs from 'emailjs-com';
+import { useNavigate } from 'react-router-dom';
+
 
 const ProtectiveRegister = () => {
   const [formData, setFormData] = useState({
@@ -38,6 +40,7 @@ const ProtectiveRegister = () => {
     }
   });
   
+  const navigate = useNavigate();
 
   const [provincias, setProvincias] = useState([]); // Estado para almacenar las provincias
   const [ciudades, setCiudades] = useState([]);  // Estado para almacenar las ciudades basadas en la provincia seleccionada
@@ -134,7 +137,7 @@ const handleChange = (e) => {
         console.log('Correo enviado con éxito:', response.status, response.text);
       })
       .catch((error) => {
-        console.error('Error al enviar el correo:', error);
+        console.error('sendEmail:Error al enviar el correo:', error);
       });
   };
 
@@ -173,16 +176,26 @@ const handleChange = (e) => {
     console.log("Datos enviados:", registerData);
 
 
-    axios.post('http://localhost:8081/api/Protectoras/registro', registerData)
-    .then(response => {
-      console.log('Registro exitoso', response.data);
+axios.post('http://localhost:8081/api/Protectoras/registro', registerData)
+  .then(response => {
+    console.log('Registro exitoso', response.data);
+// Redirigir al componente ValidationRegister
+    navigate('/validation-register');
+    // Si el registro es exitoso, enviar el correo
+    sendEmail(formData.email);
+  })
+  .catch(error => {
+    console.error('Axion.post:Error al registrar', error);
 
-      // Si el registro es exitoso, enviar el correo
-      sendEmail(formData.email);  // Llamar a la función para enviar el correo
-    })
-    .catch(error => {
-      console.error('Error al registrar', error);
-    });
+    // Verificar si el error es por un correo duplicado
+    if (error.response && error.response.status === 400) {  // Suponiendo que el backend devuelve 409 para correo duplicado
+      // Redirigir al componente EmailError
+      navigate('/email-error');  // Asegúrate de tener la ruta configurada en tu sistema de rutas
+    } else {
+      // Manejar otros posibles errores
+      setErrorMessage('Ocurrió un error inesperado. Intenta nuevamente.');
+    }
+  })
   };
   
   
