@@ -6,13 +6,16 @@ import Onboarding from './Pages/onboarding/Onboarding';
 import useOnboardingRedirect from './hooks/useOnboardingRedirect'
 import ProtectedRoute from './Routes/ProtectedRoute';
 import './app.css'
+import LoggedInProtect from './Routes/LoggedInProtect';
 
 function App() {
   useOnboardingRedirect();
 
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route path="/" 
+        element={ <LoggedInProtect element={ <Login />} />} 
+      />
       <Route path="/onboarding" element={<Onboarding />} />
       <Route 
         path="/home" 
