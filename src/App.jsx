@@ -1,6 +1,11 @@
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './Pages/Home';
-import Login from './Pages/login/Login';
+import Login from './Pages/Login';
+import Register from './Pages/Register';
+import EmailError from './components/ValidationRegister/EmailError';
+import ValidationRegister from './components/ValidationRegister/ValidationRegister';
+import SuccessScreen from './components/ValidationRegister/SuccessScreen';
+import "./App.css"
 import RecoverPassword from './Pages/RecoverPassword';
 import Onboarding from './Pages/onboarding/Onboarding';
 import useOnboardingRedirect from './hooks/useOnboardingRedirect'
@@ -13,6 +18,12 @@ function App() {
 
   return (
     <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/email-error" element={<EmailError />} />
+      <Route path="/success-screen" element={<SuccessScreen />} /> 
+      <Route path="/validation-register" element={<ValidationRegister />} /> 
       <Route path="/" 
         element={ <LoggedInProtect element={ <Login />} />} 
       />
