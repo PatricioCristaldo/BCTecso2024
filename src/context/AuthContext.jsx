@@ -8,7 +8,6 @@ const AuthProvider = ( { children } )=>{
     const saveLogin = ( token ) => {
         setAuthToken( token );
         console.log("Guardaremos el token!")
-        localStorage.setItem('authToken', token);
     }
 
     const logout = ()=>{

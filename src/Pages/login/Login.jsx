@@ -25,8 +25,9 @@ function Login() {
   };
 
   function rememberLogin(token) {
+    saveLogin( token );
     if (rememberMe) {
-      saveLogin( token );
+      localStorage.setItem('authToken', token);
     } else {
       sessionStorage.setItem("authToken", token )
     }
