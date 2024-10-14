@@ -142,6 +142,7 @@ function Login() {
                   type="submit"
                   className="mt-2 align-self-center w-100 custom-secondary-btn"
                   disabled={isSubmitting}
+                  onClick={()=> navigate('/register')}
                 >
                   Crear cuenta
                 </Button>
