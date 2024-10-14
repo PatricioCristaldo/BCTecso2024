@@ -1,46 +1,49 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { Form, Button, Container } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-import './login.css'
-import mumaLogo from '../../assets/isologo.png'
+import "./login.css";
+import mumaLogo from "../../assets/isologo.png";
+import { AuthContext } from "../../context/AuthContext";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string("Debe ingresar su usuario")
     .email("Debe ingresar un email")
     .required("Usuario es requerido"),
-  password: Yup.string()
-    // .matches(/^\d+$/, "El password debe ser numérico")
-    // .required("Password es requerido"),
+  password: Yup.string(),
+  // .matches(/^\d+$/, "El password debe ser numérico")
+  // .required("Password es requerido"),
 });
-
 
 function Login() {
   const [rememberMe, setRememberMe] = useState(false);
+  const { saveLogin } = useContext(AuthContext)
   const handleRememberMe = () => {
-    setRememberMe (prevRememberMe => !prevRememberMe);
-  }
+    setRememberMe((prevRememberMe) => !prevRememberMe);
+  };
 
-  function rememberLogin( token ){
-    if (rememberMe){
-      localStorage.setItem('accessToken', token)
+  function rememberLogin(token) {
+    if (rememberMe) {
+      saveLogin( token );
+    } else {
+      sessionStorage.setItem("authToken", token )
     }
-}
+  }
 
   const navigate = useNavigate();
   const handleSubmit = (values) => {
     console.log("Email:", values.email);
     console.log("Password:", values.password);
     axios
-      .post("http://localhost:8081/api/Authentication/token", {
+      .post("http://localhost:8080/api/Authentication/token", {
         user: values.email,
         password: values.password,
       })
       .then((response) => {
         console.log("Response:", response.data?.token);
-        rememberLogin( response.data?.token )
+        rememberLogin(response.data?.token);
         navigate("/home");
       })
       .catch((error) => {
@@ -50,9 +53,7 @@ function Login() {
 
   return (
     <div className="vh-100 justify-content-center align-items-center">
-      <Container
-        className=" rounded-2 py-4 mt-5 align-self-center login"
-      >
+      <Container className=" rounded-2 py-4 mt-5 align-self-center login">
         <div className="pt-5 pb-5 d-flex justify-content-center">
           <img src={mumaLogo} alt="Muma isologo" />
         </div>
@@ -108,16 +109,18 @@ function Login() {
               </Form.Group>
               <div className="d-flex flex-row justify-content-between mt-3">
                 <Form.Group controlId="formBasicCheckbox">
-                  <Form.Check 
-                    type="checkbox" 
-                    label="Recordarme" 
-                    name="rememberMe" 
+                  <Form.Check
+                    type="checkbox"
+                    label="Recordarme"
+                    name="rememberMe"
                     className="fs-7"
                     checked={rememberMe}
                     onChange={handleRememberMe}
                   />
                 </Form.Group>
-                <Link to="/recoverpassword" className="fs-8 recover-password">¿Olvidaste tu Contraseña?</Link>
+                <Link to="/recoverpassword" className="fs-8 recover-password">
+                  ¿Olvidaste tu Contraseña?
+                </Link>
               </div>
               <div className="justify-content-center w-100 mt-5">
                 <Button
