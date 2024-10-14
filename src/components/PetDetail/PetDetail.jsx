@@ -14,16 +14,14 @@ const PetDetail = () => {
   const { id } = useParams();
   const [modalShow, setModalShow] = useState(false);
   const [mascota, setMascota] = useState(null);
-  const [protectora, setProtectora] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
  
 
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlNTAyZjU4ZC05MWFkLTQwYmYtODhjNC02ODQxOGU3YTljODEiLCJ1bmlxdWVfbmFtZSI6ImZhY3VAbXVtYS5jb20iLCJuYmYiOjE3Mjg3Njc2NTAsImV4cCI6MTcyODg1NDA1MCwiaWF0IjoxNzI4NzY3NjUwLCJpc3MiOiJNVU1BLUFQSSIsImF1ZCI6Ik1VTUEtQXVkaWVuY2UifQ.UXElo8YUT0_-cf71OnmW9m5YfRBOACPlOx7FM7r0poI'; 
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI4ODM0MzIxZi00ZWEyLTRjNmEtOWQ4Ny0xMTIxOTNhZGZlNjMiLCJ1bmlxdWVfbmFtZSI6ImZhY3VAbXVtYS5jb20iLCJuYmYiOjE3Mjg4NTcxNDAsImV4cCI6MTcyODk0MzU0MCwiaWF0IjoxNzI4ODU3MTQwLCJpc3MiOiJNVU1BLUFQSSIsImF1ZCI6Ik1VTUEtQXVkaWVuY2UifQ.mrxtc67r-dw-0gq5w6jamF3AxkWaBzOOcFZhT0b1s14'; 
   
   
   useEffect(() => {
-    
     const fetchMascota = async () => {
       try {
         const response = await axios.get(`http://localhost:8081/api/Mascotas/${id}`, {
@@ -45,7 +43,6 @@ const PetDetail = () => {
   }, [id]);
 
   
-
   if (loading) {
     return <p>Cargando datos de la mascota...</p>;
   }
@@ -129,6 +126,7 @@ const PetDetail = () => {
       <ProtectoraCard
         show={modalShow}
         onHide={() => setModalShow(false)}
+        mascotaId={mascota.protectora.id}
       />
     </>
   );
