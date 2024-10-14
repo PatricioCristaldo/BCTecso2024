@@ -1,7 +1,9 @@
 import './ValidationRegister.css';
 import SuccessImg from '../../assets/BackgroundImg/SuccessImg.png';
+import { useNavigate } from 'react-router-dom'
 
 const SuccessScreen = () => {
+  const navigate = useNavigate();
   return (
     <div className="validation-container">
       <div className="image-container">
@@ -21,7 +23,7 @@ const SuccessScreen = () => {
       </p>
 
       <div className="button-container">
-          <button className="button" onClick={() => window.open('https://mail.google.com', '_blank')}>
+          <button className="button" onClick={() => navigate('/')}>
           Ir al login
           </button>
       </div>

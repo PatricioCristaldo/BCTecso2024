@@ -1,7 +1,9 @@
 import './ValidationRegister.css';
 import EmailImg from '../../assets/BackgroundImg/EmailImg.png';
+import { useNavigate } from 'react-router-dom'
 
 const EmailError = () => {
+  const navigate = useNavigate();
   return (
     <div className="validation-container">
       <div className="image-container">
@@ -25,7 +27,7 @@ el enlace “Olvidé mi contraseña
       </p>
 
       <div className="button-container">
-          <button className="button" onClick={() => window.open('https://mail.google.com', '_blank')}>
+          <button className="button" onClick={() => navigate('/')}>
           Ir al login
           </button>
       </div>

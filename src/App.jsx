@@ -4,6 +4,7 @@ import Login from './Pages/Login';
 import Register from './Pages/Register';
 import EmailError from './components/ValidationRegister/EmailError';
 import ValidationRegister from './components/ValidationRegister/ValidationRegister';
+import SuccessScreen from './components/ValidationRegister/SuccessScreen';
 import "./App.css"
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Route path="/home" element={<Home />} />
       <Route path="/register" element={<Register />} />
       <Route path="/email-error" element={<EmailError />} />
+      <Route path="/success-screen" element={<SuccessScreen />} /> 
       <Route path="/validation-register" element={<ValidationRegister />} /> 
     </Routes>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import "../../App.css";
 import './protective-register.css'; // Importar los estilos
 import isologo from "../../assets/Icons/isologo.svg";
@@ -140,7 +140,9 @@ const handleChange = (e) => {
         console.error('sendEmail:Error al enviar el correo:', error);
       });
   };
-
+  useEffect(() => {
+    emailjs.init("Q1r6WCD0oCWqh8uEG");
+  }, []);
   const handleSubmit = (event) => {
     event.preventDefault();
   
@@ -198,13 +200,45 @@ axios.post('http://localhost:8081/api/Protectoras/registro', registerData)
   })
   };
   
-  
+  const formRef = useRef(null);
+  const buttonRef = useRef(null);
+
+  useEffect(() => {
+    const btn = buttonRef.current;
+    const form = formRef.current;
+
+    if (form && btn) {
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        btn.value = 'Registrando...';
+
+        const serviceID = 'service_ex9pvdp';
+        const templateID = 'template_h458cry';
+
+        emailjs.sendForm(serviceID, templateID, form)
+          .then(() => {
+            btn.value = 'Registrar';
+            alert('Registro Exitoso!');
+          }, (err) => {
+            btn.value = 'Registrar';
+            alert(JSON.stringify(err));
+          });
+      });
+    }
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      if (form) {
+        form.removeEventListener('submit', () => {});
+      }
+    };
+  }, []);
   
 
   return (
     <div className="protective-register-container">
       <img src={isologo} alt="Logo" className="protective-register-logo" />
-      <form onSubmit={handleSubmit} className="protective-register-form">
+      <form ref={formRef} id="form" onSubmit={handleSubmit} className="protective-register-form">
         <div>
           <input
             type="text"
@@ -362,8 +396,6 @@ axios.post('http://localhost:8081/api/Protectoras/registro', registerData)
   </div>
 </div>
 
-
-
   <div className="input-group">
     <input
       type="text"
@@ -407,11 +439,12 @@ axios.post('http://localhost:8081/api/Protectoras/registro', registerData)
       className={`${formData.facebook ? 'filled' : ''}`}
     />
   </div>
-        <button type="submit" className="button-submit">
-          Registrar
-        </button>
+  <input  ref={buttonRef} type="submit" className="button-submit" id="button" value="Registrar" ></input>
       </form>
+      <script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     </div>
+    
   );
 };
 
