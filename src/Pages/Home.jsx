@@ -1,7 +1,16 @@
+import { useContext, useEffect } from 'react'
 import { Button, Card, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/userContext";
+
 
 const Home = () => {
+  const { user } = useContext(UserContext);
+
+  useEffect( ()=>{
+    console.log(user);
+  }, [])
+
   const navigate = useNavigate();
 
   const goToLogin = () => {
@@ -15,7 +24,7 @@ const Home = () => {
     >
       <Card bg="dark" text="white" className="p-4" style={{ width: "22rem" }}>
         <Card.Body>
-          <Card.Title className="text-center">Bienvenido al Home</Card.Title>
+          <Card.Title className="text-center">Bienvenido al Home, {user.nombre}</Card.Title>
           <Card.Text className="text-center">
             Click para ir hacia el login:
           </Card.Text>

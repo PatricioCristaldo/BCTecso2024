@@ -7,6 +7,7 @@ import { useNavigate, Link } from "react-router-dom";
 import "./login.css";
 import mumaLogo from "../../assets/isologo.png";
 import { AuthContext } from "../../context/AuthContext";
+import { UserContext } from "../../context/userContext";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string("Debe ingresar su usuario")
@@ -20,6 +21,8 @@ const validationSchema = Yup.object().shape({
 function Login() {
   const [rememberMe, setRememberMe] = useState(false);
   const { saveLogin } = useContext(AuthContext)
+  const { setUser } = useContext(UserContext);
+
   const handleRememberMe = () => {
     setRememberMe((prevRememberMe) => !prevRememberMe);
   };
@@ -44,6 +47,8 @@ function Login() {
       })
       .then((response) => {
         console.log("Response:", response.data?.token);
+        console.log("Whole response: ", response.data.usuario);
+        setUser(response.data.usuario);
         rememberLogin(response.data?.token);
         navigate("/home");
       })
