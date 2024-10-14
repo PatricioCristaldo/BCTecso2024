@@ -16,7 +16,9 @@ function App() {
       <Route path="/" 
         element={ <LoggedInProtect element={ <Login />} />} 
       />
-      <Route path="/onboarding" element={<Onboarding />} />
+      <Route path="/onboarding" 
+        element={ <LoggedInProtect element={<Onboarding />} />} 
+      />
       <Route 
         path="/home" 
         element={<ProtectedRoute element={<Home />} />} 
