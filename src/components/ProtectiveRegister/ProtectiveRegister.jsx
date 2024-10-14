@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import "../../App.css";
-import './protective-register.css'; // Importar los estilos
+import './protective-register.css'; 
 import isologo from "../../assets/Icons/isologo.svg";
-import eyeIcon from '../../assets/Icons/eyeIcon.svg';  // Icono para mostrar contraseña
-import eyeSlashIcon from '../../assets/Icons/eyeSlashIcon.svg';  // Icono para ocultar contraseña
+import eyeIcon from '../../assets/Icons/eyeIcon.svg';  
+import eyeSlashIcon from '../../assets/Icons/eyeSlashIcon.svg';  
 import axios from "axios";
 import emailjs from 'emailjs-com';
 import { useNavigate } from 'react-router-dom';
@@ -42,19 +42,18 @@ const ProtectiveRegister = () => {
   
   const navigate = useNavigate();
 
-  const [provincias, setProvincias] = useState([]); // Estado para almacenar las provincias
-  const [ciudades, setCiudades] = useState([]);  // Estado para almacenar las ciudades basadas en la provincia seleccionada
+  const [provincias, setProvincias] = useState([]); 
+  const [ciudades, setCiudades] = useState([]);  
   const [errors, setErrors] = useState({});
-  const [showPassword, setShowPassword] = useState(false); // Controlar visibilidad de contraseña
-  const [loading, setLoading] = useState(false);  // Estado para gestionar el loading
-  const [successMessage, setSuccessMessage] = useState('');  // Mensaje de éxito o error
+  const [showPassword, setShowPassword] = useState(false); 
+  const [loading, setLoading] = useState(false);  
+  const [successMessage, setSuccessMessage] = useState(''); 
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    // Llamada a la API para obtener las provincias cuando el componente se monta
     axios.get('http://localhost:8081/api/combos/Provincias')
       .then((response) => {
-        setProvincias(response.data); // Guardar las provincias en el estado
+        setProvincias(response.data); 
       })
       .catch((error) => {
         console.error('Error al obtener provincias:', error);
@@ -62,10 +61,10 @@ const ProtectiveRegister = () => {
   }, []);
 
   useEffect(() => {
-    if (formData.provincia) {  // Solo hacer la llamada si hay una provincia seleccionada
+    if (formData.provincia) {  
       axios.get(`http://localhost:8081/api/combos/Ciudades/${formData.provincia}`)
         .then((response) => {
-          setCiudades(response.data);  // Guardar las ciudades en el estado
+          setCiudades(response.data);  
         })
         .catch((error) => {
           console.error('Error al obtener ciudades:', error);
@@ -107,7 +106,7 @@ const handleChange = (e) => {
     if (formData.password !== formData.confirmarPassword) {
       newErrors.confirmarPassword = 'Las contraseñas no coinciden';
     }
-   // Validación de la dirección
+   
    if (!formData.direccion.calle) {
     newErrors.calle = 'El campo calle es requerido';
   }
@@ -190,7 +189,7 @@ axios.post('http://localhost:8081/api/Protectoras/registro', registerData)
     console.error('Axion.post:Error al registrar', error);
 
     // Verificar si el error es por un correo duplicado
-    if (error.response && error.response.status === 400) {  // Suponiendo que el backend devuelve 409 para correo duplicado
+    if (error.response && error.response.status === 401) {  // Suponiendo que el backend devuelve 401 para correo duplicado
       // Redirigir al componente EmailError
       navigate('/email-error');  // Asegúrate de tener la ruta configurada en tu sistema de rutas
     } else {
