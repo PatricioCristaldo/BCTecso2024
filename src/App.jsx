@@ -5,7 +5,6 @@ import Register from './Pages/Register';
 import EmailError from './components/ValidationRegister/EmailError';
 import ValidationRegister from './components/ValidationRegister/ValidationRegister';
 import SuccessScreen from './components/ValidationRegister/SuccessScreen';
-import "./App.css"
 import RecoverPassword from './Pages/RecoverPassword';
 import Onboarding from './Pages/onboarding/Onboarding';
 import useOnboardingRedirect from './hooks/useOnboardingRedirect'

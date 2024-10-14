@@ -1,11 +1,110 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root{
-    --color-primary: #F08318;
-    --color-secondary: #017179;
+    --color-primary-01: #F08318;
+    --color-primary-02: #F8AD34;
+    --color-primary-03: rgba(243, 233, 236, 1);
+    --color-secondary-01: #0199A3;
+    --color-secondary-02: #017179;
+    --color-secondary-03: rgba(153, 219, 214, 1);
     --background-gray: #F6F6F6;
+    --color-neutro: #5F5B5B;
+    --text-gray: rgba(173, 168, 168, 1);
+    --light-gray: rgba(217, 217, 217, 1);
 }
 
-*{
-  font-family: "Montserrat", sans-serif
+/* ----- RESET CODE ------ */
+* {
+    font-family: "Montserrat", sans-serif;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ----- END OF RESET CODE ------ */
+
+/* ------- UTILITY CLASSES --------- */
+
+.box-shadow-none{
+    box-shadow: none;
+}
+
+.text-pre-line {
+    white-space: pre-line;
+}
+
+.fs-7{
+    font-size: 14px;
+}
+
+.fs-8{
+    font-size: 12px;
+}
+
+.fw-400{
+    font-weight: 400px;
+}
+
+.fw-700{
+    font-weight: 700;
+}
+
+.line-height-20{
+    line-height: 20px;
+}
+
+.bg-secondary-03{
+    background-color: var(--color-secondary-03);
+}
+
+.bg-lightgray{
+    background-color: var(--light-gray);
+}
+
+.gap-1{
+    gap: 1px;
+}
+
+.full-height {
+    height: 100vh;
+}
+/* --------------------------------- */
+
+.custom-primary-btn{
+  background-color: var(--color-primary-01) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 16px 25px !important;
+  color: white;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+}
+
+.custom-secondary-btn{
+  border: 1px solid var(--color-primary-01) !important; 
+  color: var(--color-primary-01) !important;
+  border-radius: 8px !important;
+  padding: 16px 25px !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+}
+
+input:not([type="checkbox"]):not([type="radio"]){
+  background-color: var(--background-gray);
+  border-radius: 10px;
+  border: none;
+}
+
+.neutro-input::placeholder{
+  color: #5F5B5B !important;
 }

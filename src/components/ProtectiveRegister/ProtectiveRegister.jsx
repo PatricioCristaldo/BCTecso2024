@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import "../../App.css";
+import "../../app.css";
 import './protective-register.css'; 
 import isologo from "../../assets/Icons/isologo.svg";
 import eyeIcon from '../../assets/Icons/eyeIcon.svg';  
