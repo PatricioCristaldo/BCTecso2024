@@ -1,3 +1,9 @@
+import { Routes, Route } from 'react-router-dom';
+import Login from './Pages/Login';
+import React from 'react';
+import './App.css'
+import HomeMascotero from './Pages/HomeMascotero';
+import HomeProtectora from './Pages/HomeProtectora';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
@@ -17,7 +23,11 @@ function App() {
 
   return (
     <Routes>
+      <React.Fragment>
+      </React.Fragment>
       <Route path="/" element={<Login />} />
+      {/* <Route path="/home" element={<HomeMascotero />} /> */}
+      <Route path="/homeP" element={<HomeProtectora />} />
       <Route path="/home" element={<Home />} />
       <Route path="/register" element={<Register />} />
       <Route path="/email-error" element={<EmailError />} />
