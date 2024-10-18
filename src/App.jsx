@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './Pages/login/Login';
 import React from 'react';
-import './App.css'
 import HomeMascotero from './Pages/HomeMascotero';
 import HomeProtectora from './Pages/HomeProtectora';
 import Home from './Pages/Home';
+import PetDetail from './components/PetDetail/PetDetail';
+import './App.css'
 import Register from './Pages/Register';
 import EmailError from './components/ValidationRegister/EmailError';
 import ValidationRegister from './components/ValidationRegister/ValidationRegister';
@@ -15,11 +16,13 @@ import useOnboardingRedirect from './hooks/useOnboardingRedirect'
 import ProtectedRoute from './Routes/ProtectedRoute';
 import LoggedInProtect from './Routes/LoggedInProtect';
 
+
 function App() {
   useOnboardingRedirect();
 
   return (
     <Routes>
+      <Route path='/mascotas/:id' element={<PetDetail/>}/>
       <React.Fragment>
       </React.Fragment>
       {/* <Route path="/" element={<Login />} /> */}
@@ -40,6 +43,7 @@ function App() {
         element={<ProtectedRoute element={<HomeMascotero />} />} 
       />
       <Route path="/recoverpassword" element={<RecoverPassword />} />
+
     </Routes>
   );
 }

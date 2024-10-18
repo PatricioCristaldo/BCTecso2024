@@ -1,0 +1,140 @@
+
+
+.adoption-btn{
+    display: flex;
+    background-color: #892be228;
+    color: #892be2c7;
+    border: 1px solid #892be2a6;
+    border-radius: 16px;
+    width: 106px fixed;
+    height: 35px;
+    align-items: center;
+    justify-content: center;
+    padding: 14px ;
+}
+
+.sol-adopt-btn{
+  display: flex;
+  align-items: center;
+  width: 328px;
+  height: 50px;
+  border-radius: 8px;
+  padding: 16px 25px;
+  border: none;
+  font-family: var(--monserrat);
+}
+.sol-adopt-btn:hover{
+  background-color: var(--color-primary-2);
+}
+.pet-container{
+    margin: 0;
+    padding: 0;
+}
+
+.card-body{
+  margin-top: 20px;
+  padding: 20px 25px;
+  border-radius: 20%;
+}
+.carousel-container {
+    max-width: 600px; 
+    margin: 0 auto; 
+  }
+
+  .carousel-container img {
+    max-width: 600px; 
+    margin: 0 auto; 
+    height: 400px;
+    object-fit: cover;
+  }
+  
+  .carousel-itm{
+    max-height: 500px; 
+    object-fit: contain; 
+  }
+
+.primary{
+    background-color: var(--color-primary);
+}
+.box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); 
+  gap: 20px; 
+  max-width: 1200px;
+  margin: 0 auto; 
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+.box{
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  padding: 5px 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px 6px;
+  text-align: center;
+  height: auto;
+  min-width: 80px;
+  box-sizing: border-box;
+  
+}
+
+.carousel-indicators [data-bs-target]{
+  width: 20px;
+  height: 5px;
+  border-radius: 25px;
+  background-color: #ddd;
+}
+.carousel-indicators .active{
+  background-color: var(--color-primary-2);
+}
+
+.container-center-itms{
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  gap: 8px;
+}
+.name-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.protectora-card{
+  display: flex;
+  margin: 0;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px; 
+  overflow: hidden;
+  box-sizing: border-box; 
+}
+.protectora-card-itms{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.data-btn{
+  display: flex;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: var(--color-secondary); 
+    border: none;
+    align-items: center;
+    justify-content: center;
+}
+.h4-txt{
+  font-family: Arial, Helvetica, sans-serif ;
+}
+
+p{
+  margin-bottom: 2px;
+  color: var(--text-gray);
+  font-size: 15px;
+}
