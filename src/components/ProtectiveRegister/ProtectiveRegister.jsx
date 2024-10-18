@@ -217,10 +217,10 @@ axios.post('http://localhost:8081/api/Protectoras/registro', registerData)
         emailjs.sendForm(serviceID, templateID, form)
           .then(() => {
             btn.value = 'Registrar';
-            alert('Registro Exitoso!');
+           
           }, (err) => {
             btn.value = 'Registrar';
-            alert(JSON.stringify(err));
+            
           });
       });
     }
