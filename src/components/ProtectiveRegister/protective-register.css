@@ -1,0 +1,163 @@
+/* ProtectiveRegister.css */
+
+.protective-register-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #fff;
+  }
+  
+  .protective-register-logo {
+    margin-bottom: 50px;
+  }
+  /* Estilo de los inputs */
+.protective-register-form input,
+.protective-register-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  transition: all 0.3s;
+  color: black; /* Inicialmente negro */
+}
+
+.protective-register-form input.filled,
+.protective-register-form textarea.filled {
+  color: #F08318; /* Cambia a naranja cuando el campo está lleno */
+}
+  .protective-register-form {
+    width: 90%;
+    max-width: 400px;
+  }
+  
+  .protective-register-form label {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 8px;
+    display: block;
+  }
+  
+  .protective-register-form input,
+  .protective-register-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #F6F6F6;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+    color: #F08318; /* Texto color naranja */
+  }
+  
+  .protective-register-form input::placeholder,
+  .protective-register-form textarea::placeholder {
+    color: #017179; /* Placeholder en color naranja */
+  }
+  
+  .protective-register-form input:focus,
+  .protective-register-form textarea:focus {
+    border-color: #F08318 ; /* Borde naranja al enfocar */
+  }
+  
+  .protective-register-form input[type="password"] {
+    padding-right: 40px; /* Espacio para el ícono */
+  }
+  
+  .icon-password-toggle {
+    position: relative;
+  }
+  
+  .icon-password-toggle img {
+    position: absolute;
+    right: 10px;
+    top: 40%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #F08318; /* Ícono de color naranja */
+  }
+  
+  .button-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: #F08318; /* Botón de color naranja */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .button-submit:hover {
+    background-color: #F08318;
+  }
+  
+  .error {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: -12px;
+    margin-bottom: 12px;
+  }
+  
+  /* Estilos para los campos con errores */
+.protective-register-form .error-input {
+  border-color: red; /* Borde rojo para los campos con error */
+}
+
+.protective-register-form .error-message {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+select {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px !important;
+  font-size: 16px;
+  color: #017179;
+  background-color: #F6F6F6;  /* El color de fondo oscuro */
+  border: 2px solid #F6F6F6;  /* Borde gris oscuro similar a los inputs */
+  border-radius: 8px;  /* Mismo borde redondeado */
+  box-sizing: border-box;
+}
+
+select.filled {
+  background-color: #F6F6F6; /* El fondo cuando hay un valor */
+  color: #F08318
+}
+
+select.error-input {
+  border: 2px solid red; /* Borde rojo en caso de error */
+}
+
+select:focus {
+  color: #F08318;
+  border-color: #F08318;  /* Cambiar color al enfocar */
+  outline: none;
+}
+
+select option {
+  color: black;  /* Para que las opciones del dropdown tengan color de texto negro */
+}
+.row-fields {
+  display: flex;
+  justify-content: space-between; /* Distribuye los campos uniformemente */
+  gap: 10px; /* Añade un espacio entre los campos */
+}
+
+.input-group {
+  flex: 1; /* Permite que los campos ocupen el mismo espacio */
+}
+
+input {
+  width: 100%; /* Asegura que los inputs ocupen el ancho disponible */
+}
