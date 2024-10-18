@@ -1,6 +1,6 @@
 import "./Home.css"
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { NavigationBar } from "../components/NavigationBar/NavigationBar";
 import SearchBar from "../components/SearchBar/SearchBar";
 import AnimalsCard from "../components/AnimalsCard/AnimalsCard";
@@ -21,6 +21,8 @@ import Perro from "../assets/perro.png"
 import Hamster from "../assets/hamster.png"
 import Conejo from "../assets/conejo.png"
 import ProtectorsCard from "../components/ProtectorsCard/ProtectorsCard";
+import { getAllPets } from "../services/petService";
+import { AuthContext } from "../context/AuthContext";
 
 const animales = [
   {
@@ -119,35 +121,58 @@ const animales = [
 
 const HomeProtectora = () => {
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
   const [selectedFilters, setSelectedFilters] = useState([]);
-  const [filteredItems, setFilteredItems] = useState(animales);
+  const [pets, setPets] = useState([]);
+  const [myPets, setMyPets] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
+  
 
   const goToAddPet = () => {
     navigate("/add-pet");
   };
 
+  async function getPets() {
+    const response = await getAllPets()
+    setPets(response.data)
+  }
+
+  useEffect(() => {
+    getPets();
+  }, [])
+
+  useEffect(() => {
+    if (user) {
+      const filteredPets = pets.filter((pet) => pet.protectoraId === user.id);
+      setMyPets(filteredPets); // Guardar las mascotas filtradas por protectoraId
+      setFilteredItems(filteredPets); // Inicializar `filteredItems` con las mascotas de la protectora
+    }
+  }, [pets, user]);
+
+  
+  // Actualiza los filtros seleccionados
   const handleFilterButtonClick = (selectedCategory) => {
     if (selectedFilters.includes(selectedCategory)) {
-      let filters = selectedFilters.filter((el) => el !== selectedCategory);
+      const filters = selectedFilters.filter((el) => el !== selectedCategory);
       setSelectedFilters(filters);
     } else {
       setSelectedFilters([...selectedFilters, selectedCategory]);
     }
   };
 
+  // Filtrar las mascotas según los filtros seleccionados
   useEffect(() => {
     filterItems();
-  }, [selectedFilters]);
+  }, [myPets, selectedFilters]);
 
   const filterItems = () => {
     if (selectedFilters.length > 0) {
-      let tempItems = selectedFilters.map((selectedCategory) => {
-        let temp = animales.filter((item) => item.especie === selectedCategory);
-        return temp;
-      });
-      setFilteredItems(tempItems.flat());
+      const tempItems = selectedFilters.map((selectedCategory) =>
+        myPets.filter((item) => item.tipoAnimal === selectedCategory)
+      );
+      setFilteredItems(tempItems.flat()); // Aplanar los arrays y actualizar `filteredItems`
     } else {
-      setFilteredItems([...animales]);
+      setFilteredItems([...myPets]); // Si no hay filtros, mostrar todas las mascotas de la protectora
     }
   };
 
@@ -197,7 +222,7 @@ const HomeProtectora = () => {
             ))}
             </div>
             {
-                animales.length > 0 ?
+                myPets.length > 0 ?
                 (
                     <div className="registered-animals">
                         <div className="d-flex justify-content-between align-items-center label" style={{paddingRight: '10px',marginBottom: '15px',marginTop: '.5rem'}}>

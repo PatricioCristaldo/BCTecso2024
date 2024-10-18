@@ -128,7 +128,7 @@ const HomeMascotero = () => {
 
   useEffect(() => {
     getPets();
-    console.log(user)
+    //console.log(user)
   }, [user])
 
   useEffect(() => {
