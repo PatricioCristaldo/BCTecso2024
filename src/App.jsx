@@ -37,7 +37,7 @@ function App() {
       <Route path="/mascotas/:id" element={<PetDetail/>}/>
       {/* <Route path="/" element={<Login />} /> */}
       <Route path="/home" element={homeComponent} />
-      <Route path="/homeP" element={<HomeProtectora />} />
+      <Route path="/homeMascotero" element={<HomeMascotero />} />
       <Route path="/register" element={<Register />} />
       <Route path="/email-error" element={<EmailError />} />
       <Route path="/success-screen" element={<SuccessScreen />} /> 
