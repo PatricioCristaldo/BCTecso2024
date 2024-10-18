@@ -22,9 +22,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path='/mascotas/:id' element={<PetDetail/>}/>
-      <React.Fragment>
-      </React.Fragment>
+      <Route path="/mascotas/:id" element={<PetDetail/>}/>
       {/* <Route path="/" element={<Login />} /> */}
       <Route path="/home" element={<HomeMascotero />} />
       <Route path="/homeP" element={<HomeProtectora />} />

@@ -132,6 +132,7 @@ function Login() {
                   type="submit"
                   className="mt-2 align-self-center w-100 custom-primary-btn"
                   disabled={isSubmitting}
+                  style={{backgroundColor: '#F08318'}}
                 >
                   Login
                 </Button>
