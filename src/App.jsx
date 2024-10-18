@@ -1,20 +1,21 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './Pages/login/Login';
 import React from 'react';
 import HomeMascotero from './Pages/HomeMascotero';
 import HomeProtectora from './Pages/HomeProtectora';
 import Home from './Pages/Home';
-import PetDetail from './components/PetDetail/PetDetail';
-import './App.css'
+import Login from './Pages/Login/Login';
 import Register from './Pages/Register';
-import EmailError from './components/ValidationRegister/EmailError';
-import ValidationRegister from './components/ValidationRegister/ValidationRegister';
-import SuccessScreen from './components/ValidationRegister/SuccessScreen';
+import EmailError from './components/emailErrorScreen/EmailError';
+import ValidationRegister from './components/validationScreen/ValidationRegister';
+import SuccessScreen from './components/successScreen/SuccessScreen';
+import "./App.css"
+import PetDetail from './components/PetDetail/PetDetail';
 import RecoverPassword from './Pages/RecoverPassword';
 import Onboarding from './Pages/onboarding/Onboarding';
 import useOnboardingRedirect from './hooks/useOnboardingRedirect'
 import ProtectedRoute from './Routes/ProtectedRoute';
 import LoggedInProtect from './Routes/LoggedInProtect';
+import ProtectiveRegister from './components/ProtectiveRegister/ProtectiveRegister';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
       <Route path="/home" element={<HomeMascotero />} />
       <Route path="/homeP" element={<HomeProtectora />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/protective" element={<ProtectiveRegister />} />
       <Route path="/email-error" element={<EmailError />} />
       <Route path="/success-screen" element={<SuccessScreen />} /> 
       <Route path="/validation-register" element={<ValidationRegister />} /> 

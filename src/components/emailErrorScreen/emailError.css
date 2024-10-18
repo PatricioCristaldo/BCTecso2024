@@ -1,24 +1,24 @@
-.validation-container {
+.email-container {
     max-width: 400px;
     margin: 0 auto;
     text-align: left;
     padding: 30px;
     font-family: 'Arial', sans-serif;
-    display: flex;
+/*     display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 90vh;
+  height: 90vh; */
   }
   
   .image-container {
     border-radius: 50%;
-    width: 200px;
-    height: 200px;
+/*     width: 200px;
+    height: 200px; */
     margin: -10px auto 20px auto;
-    margin-bottom: 70px;
-    display: flex;
+/*    margin-bottom: 70px;
+     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
   }
   
   .image {
@@ -35,13 +35,13 @@
   .text {
     color: #4A4A4A;
     font-size: 16px;
-    margin-bottom: 20px;
+    margin-bottom: 18%;
   }
   
   .note {
     color: #888888;
     font-size: 14px;
-    margin-bottom: 30px;
+/*     margin-bottom: 30px; */
   }
   
   .button {

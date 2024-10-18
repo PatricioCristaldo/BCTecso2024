@@ -1,4 +1,4 @@
-import './ValidationRegister.css';
+import './successScreen.css';
 import SuccessImg from '../../assets/BackgroundImg/SuccessImg.png';
 import { useNavigate } from 'react-router-dom'
 
@@ -18,7 +18,9 @@ const SuccessScreen = () => {
         />
       </div>
       <h2 className="title">¡Qué bueno que estés acá!</h2>
-      <p className="text">
+      <p className="text" style={{ 
+            marginBottom: "30%"
+          }}>
       ¡Listo ya ! Ya puedes empezar a usar tu cuenta.
       </p>
 
