@@ -1,38 +1,40 @@
 import React, { useState } from 'react';
-import ProtectiveRegister from '../components/ProtectiveRegister/ProtectiveRegister';
+import { useNavigate } from 'react-router-dom';
+import './Register.css';
+import tickMascotero from '../assets/Icons/tickMascotero.png';  
+import tickProtectora from '../assets/Icons/tickProtectora.png';  
+import puntitosMascotero from '../assets/Icons/puntitosMascotero.png';  
+import puntitosProtectora from '../assets/Icons/puntitosProtectora.png';  
 
 function Register() {
-  const [tipoUsuario, setTipoUsuario] = useState(""); // Estado para almacenar el tipo de usuario seleccionado
-
-  const handleUserSelection = (tipo) => {
-    setTipoUsuario(tipo); // Establece el tipo de usuario cuando el usuario selecciona una opción
-  };
-
+  const navigate = useNavigate();
+  
   return (
-    <div className="container mt-5">
-      {tipoUsuario === "" && (
-        <div className="d-flex justify-content-center">
-          <div>
-            <h2>Seleccione su tipo de usuario</h2>
-            <button
-              className="btn btn-primary m-2"
-              onClick={() => handleUserSelection("protectora")}
-            >
-              Protectora
-            </button>
-            <button
-              className="btn btn-secondary m-2"
-              onClick={() => handleUserSelection("mascotero")}
-            >
-              Mascotero
-            </button>
-          </div>
-        </div>
-      )}
+    <div className="d-flex vh-100 flex-column justify-content-center align-items-center">
+            <div className='w-100'>
+                <a onClick={() => handleClick("mascotero")} style={{textDecoration:'none'}} className='d-flex flex-column justify-content-center align-items-center'>
+                    <img src={puntitosMascotero} alt="" className='puntitos-mascotero'/>
+                    <div className='d-flex flex-column align-items-center' style={{paddingRight:'8rem'}}>
+                        <div className="rounded-circle d-flex align-items-center justify-content-center flex-column tick-mascotero" style={{boxShadow:'3px 5px 10px 3px rgba(0,0,0,0.24)'}}>
+                            <img src={tickMascotero} alt="" style={{width:'83px'}}/>
+                        </div>
+                        <span className='titulo-mascotero'>Mascotero</span>
+                    </div>
+                </a>
+            </div >
 
-      {/* Mostrar el componente según el tipo de usuario seleccionado */}
-      {tipoUsuario === "protectora" && <ProtectiveRegister />}
-      {tipoUsuario === "mascotero" && <MascoteroRegister />}
+        <div className="w-100" onClick={() => navigate("/protective")}>
+          <a onClick={() => handleClick("protective")} style={{textDecoration:'none'}} className='d-flex flex-column justify-content-center align-items-center'>
+          <div className='d-flex flex-column align-items-center' style={{paddingLeft:'8rem'}}>
+            <div className="rounded-circle d-flex align-items-center justify-content-center tick-protectora" style={{boxShadow:'3px 5px 14px 5px rgba(0,0,0,0.24)'}} >
+              <img src={tickProtectora} alt="Tick Protectora" className="tick-icon" style={{width:'83px'}} />
+            </div>
+              <span className='titulo-protectora'>Protectora</span>
+          </div>
+            <img src={puntitosProtectora} alt="Puntitos Protectora" className='puntitos-protectora' />
+                </a>
+        </div>
+      
     </div>
   );
 }
