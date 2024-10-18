@@ -1,8 +1,7 @@
 import axios from  "axios";
 
 const apiUrl = "http://localhost:8081/api"
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI4NjVlNzEzNi1mZjFlLTQ5MmUtOWJkOC0wMDVlNWU1ZjI1NTEiLCJ1bmlxdWVfbmFtZSI6Imx1YW5hQG11bWEuY29tIiwibmJmIjoxNzI4ODYwMjI0LCJleHAiOjE3Mjg5NDY2MjQsImlhdCI6MTcyODg2MDIyNCwiaXNzIjoiTVVNQS1BUEkiLCJhdWQiOiJNVU1BLUF1ZGllbmNlIn0.H8Ft_uoOMZIxCGI5QzRama1okEzqbjzfk7iACbSqLXw"
-
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiYjlkNGQ3My02YjYwLTQwYmEtODVjZS1jNmNlMzcyZDQ0MjMiLCJ1bmlxdWVfbmFtZSI6Imx1YW5hQG11bWEuY29tIiwibmJmIjoxNzI5MjEzMjU2LCJleHAiOjE3MjkyOTk2NTYsImlhdCI6MTcyOTIxMzI1NiwiaXNzIjoiTVVNQS1BUEkiLCJhdWQiOiJNVU1BLUF1ZGllbmNlIn0.tyFzzLHw1yiQqvDAMp56JaTPuxDvZ6ybr98qaT6EAuY"
 export const getAllProtectors = async () => {
     const response = await axios.get(`${apiUrl}/Protectoras`,{
         headers: {

@@ -8,6 +8,8 @@ import "./login.css";
 import mumaLogo from "../../assets/isologo.png";
 import { AuthContext } from "../../context/AuthContext";
 import { UserContext } from "../../context/userContext";
+import { useDispatch } from "react-redux"; 
+import { setUserData } from "../../redux/slices/user"; // Importar la acción setUserData desde el slice
 
 const validationSchema = Yup.object().shape({
   email: Yup.string("Debe ingresar su usuario")
@@ -20,8 +22,9 @@ const validationSchema = Yup.object().shape({
 
 function Login() {
   const [rememberMe, setRememberMe] = useState(false);
-  const { saveLogin } = useContext(AuthContext)
-  const { setUser } = useContext(UserContext);
+  const { saveLogin } = useContext(AuthContext);
+  const navigate = useNavigate();
+
 
   const handleRememberMe = () => {
     setRememberMe((prevRememberMe) => !prevRememberMe);
@@ -36,20 +39,15 @@ function Login() {
     }
   }
 
-  const navigate = useNavigate();
   const handleSubmit = (values) => {
-    console.log("Email:", values.email);
-    console.log("Password:", values.password);
     axios
       .post("http://localhost:8081/api/Authentication/token", {
         user: values.email,
         password: values.password,
       })
       .then((response) => {
-        console.log("Response:", response.data?.token);
-        console.log("Whole response: ", response.data.usuario);
-        setUser(response.data.usuario);
-        rememberLogin(response.data?.token);
+        const { token, usuario } = response.data;
+        saveLogin(token, usuario, rememberMe);
         navigate("/home");
       })
       .catch((error) => {

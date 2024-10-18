@@ -5,8 +5,8 @@ import genderFem from "../../assets/Icons/fem.png"
 import likeIcon from "../../assets/Icons/like.png"
 import editIcon from "../../assets/Icons/edit.png"
 
-const AnimalsCard = ({animal, imageHeight, maxCard, edit}) => {
-    console.log(edit)
+const AnimalsCard = ({animal,  maxCard, imageHeight,edit}) => {
+
   return (
     <article className={maxCard ? "animals-card" : "min-animals-card"} >
         {edit ? 
@@ -17,7 +17,7 @@ const AnimalsCard = ({animal, imageHeight, maxCard, edit}) => {
                 <img src={likeIcon} alt="" />
             </button>)
         }
-        <div className="image-container" style={{height: `${imageHeight}px`}}>
+        <div className="animal-image-container" style={{height: `${imageHeight}px`}}>
             <img src={animal.fotos[0]} />
         </div>
         <div className={maxCard? "animal-info-container" : "min-animal-info-container"}>
