@@ -10,7 +10,7 @@ import axios from 'axios';
 
 function ProtectoraCard({show, onHide, mascotaId}) {
   
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMDM2Y2RiYy1kMGY5LTQ1ODYtOGE4ZC02YTBjOTM1YjdjZTIiLCJ1bmlxdWVfbmFtZSI6ImZhY3VAbXVtYS5jb20iLCJuYmYiOjE3Mjg4NjYwNjUsImV4cCI6MTcyODk1MjQ2NSwiaWF0IjoxNzI4ODY2MDY1LCJpc3MiOiJNVU1BLUFQSSIsImF1ZCI6Ik1VTUEtQXVkaWVuY2UifQ.DNlKUImUv2gxYDqfTOXrQTOTkqeaT5ZWLUFMPBXZT30'; 
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiYjlkNGQ3My02YjYwLTQwYmEtODVjZS1jNmNlMzcyZDQ0MjMiLCJ1bmlxdWVfbmFtZSI6Imx1YW5hQG11bWEuY29tIiwibmJmIjoxNzI5MjEzMjU2LCJleHAiOjE3MjkyOTk2NTYsImlhdCI6MTcyOTIxMzI1NiwiaXNzIjoiTVVNQS1BUEkiLCJhdWQiOiJNVU1BLUF1ZGllbmNlIn0.tyFzzLHw1yiQqvDAMp56JaTPuxDvZ6ybr98qaT6EAuY"
 
   const [protectora, setProtectora] = useState(null);
   const [loading, setLoading] = useState(true);

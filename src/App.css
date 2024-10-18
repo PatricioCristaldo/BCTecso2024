@@ -12,8 +12,12 @@
   --color-secondary-02: #017179;
   --color-secondary-03: rgba(153, 219, 214, 1);
   --background-gray: #F6F6F6;
-  --color-neutro: #5F5B5B;
   --text-gray: rgba(173, 168, 168, 1);
+  --monserrat: "Montserrat", sans-serif;
+  --color-primary: #F08318;
+  --color-primary-2: #F8AD34;
+  --color-secondary: #0199a3;
+  --color-neutro: #5F5B5B;
 }
 
 /* ----- RESET CODE ------ */
@@ -29,20 +33,10 @@ ol, ul {
     list-style: none;
 }
 
-/* .navbar {
-    --bs-navbar-toggler-icon-bg: url("./assets/Icons/bar-chart.png");
-    --bs-navbar-toggler-border-color: none;
-} */
+.carousel-control-prev{
+    display: none !important;
+}
 
-/* img {
-    max-width: 100%;
-    height: auto;
-} */
-
-/* ----- END OF RESET CODE ------ /
-
-/ ------- UTILITY CLASSES --------- /
-
-
-/ --------------------------------- */
-
+.carousel-control-next{
+    display: none !important;
+}

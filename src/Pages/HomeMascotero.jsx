@@ -23,7 +23,7 @@ import Conejo from "../assets/conejo.png"
 import ProtectorsCard from "../components/ProtectorsCard/ProtectorsCard";
 import { getAllPets } from "../services/petService";
 import { getAllProtectors } from "../services/protectorService";
-import { UserContext } from "../context/userContext";
+import { AuthContext } from "../context/AuthContext";
 
 
 // const animales = [
@@ -96,7 +96,7 @@ import { UserContext } from "../context/userContext";
 const HomeMascotero = () => {
 
   const navigate = useNavigate();
-  const { user } = useContext(UserContext);
+  const { user } = useContext(AuthContext);
   const [pets, setPets] = useState([]);
   const [protectors, setProtectors] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState([]);
@@ -104,10 +104,6 @@ const HomeMascotero = () => {
   const [seeAllAnimals, setSeeAllAnimals] = useState(false);
   const [seeAllProtectors, setSeeAllProtectors] = useState(false);
   
-
-  // useEffect(() => {
-  //   console.log("Protectors: ",protectors)
-  // }, [protectors])
 
   async function getPets() {
     const response = await getAllPets()
@@ -129,13 +125,11 @@ const HomeMascotero = () => {
     }
   };
 
-  useEffect( ()=>{
-    console.log(user);
-  }, [])
 
   useEffect(() => {
     getPets();
-  }, [])
+    console.log(user)
+  }, [user])
 
   useEffect(() => {
     getProtectors();
