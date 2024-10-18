@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './Pages/Home';
-import Login from './Pages/Login';
+import Login from './Pages/Login/Login';
 import Register from './Pages/Register';
-import EmailError from './components/ValidationRegister/EmailError';
-import ValidationRegister from './components/ValidationRegister/ValidationRegister';
-import SuccessScreen from './components/ValidationRegister/SuccessScreen';
+import EmailError from './components/emailErrorScreen/EmailError';
+import ValidationRegister from './components/validationScreen/ValidationRegister';
+import SuccessScreen from './components/successScreen/SuccessScreen';
 import "./App.css"
 import RecoverPassword from './Pages/RecoverPassword';
 import Onboarding from './Pages/onboarding/Onboarding';
