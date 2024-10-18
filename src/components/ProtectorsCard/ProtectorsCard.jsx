@@ -7,7 +7,7 @@ const ProtectorsCard = ({protector}) => {
         <picture className="profile-picture">
             <img src={protector.foto} alt="" />
         </picture>
-        <p className="title">{protector.nombre}</p>
+        <p className="protector-title">{protector.nombre}</p>
         <p className="description">{protector.descripcion}</p>
     </article>
   )

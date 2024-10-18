@@ -1,11 +1,48 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-:root{
-    --color-primary: #F08318;
-    --color-secondary: #017179;
-    --background-gray: #F6F6F6;
-}
 
 *{
   font-family: "Montserrat", sans-serif
 }
+
+:root{
+  --color-primary-01: #F08318;
+  --color-primary-02: #F8AD34;
+  --color-primary-03: rgba(243, 233, 236, 1);
+  --color-secondary-01: #0199A3;
+  --color-secondary-02: #017179;
+  --color-secondary-03: rgba(153, 219, 214, 1);
+  --background-gray: #F6F6F6;
+  --color-neutro: #5F5B5B;
+  --text-gray: rgba(173, 168, 168, 1);
+}
+
+/* ----- RESET CODE ------ */
+*{
+  /* font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0; */
+  border: 0;
+  /* vertical-align: baseline; */
+}
+
+ol, ul {
+    list-style: none;
+}
+
+/* .navbar {
+    --bs-navbar-toggler-icon-bg: url("./assets/Icons/bar-chart.png");
+    --bs-navbar-toggler-border-color: none;
+} */
+
+/* img {
+    max-width: 100%;
+    height: auto;
+} */
+
+/* ----- END OF RESET CODE ------ /
+
+/ ------- UTILITY CLASSES --------- /
+
+
+/ --------------------------------- */

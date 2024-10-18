@@ -1,7 +1,6 @@
 import "./Home.css"
-import { Button, Card, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { NavigationBar } from "../components/NavigationBar/NavigationBar";
 import SearchBar from "../components/SearchBar/SearchBar";
 import AnimalsCard from "../components/AnimalsCard/AnimalsCard";
@@ -24,77 +23,80 @@ import Conejo from "../assets/conejo.png"
 import ProtectorsCard from "../components/ProtectorsCard/ProtectorsCard";
 import { getAllPets } from "../services/petService";
 import { getAllProtectors } from "../services/protectorService";
+import { UserContext } from "../context/userContext";
 
-const animales = [
-  {
-    id: 1,
-    nombre: "Garfield",
-    edad: 4,
-    ciudad: "Rosario (2,5 km)",
-    sexo: "Macho",
-    foto: Garfield,
-    especie: "Gato"
-  },
-  {
-    id: 2,
-    nombre: "Tigri",
-    edad: 4,
-    ciudad: "Rosario (2,5 km)",
-    sexo: "Hembra",
-    foto: Tigri,
-    especie: "Gato"
-  },
-  {
-    id: 3,
-    nombre: "Cira",
-    edad: 4,
-    ciudad: "Rosario (2,5 km)",
-    sexo: "Hembra",
-    foto: Cira,
-    especie: "Gato"
-  },
-  {
-    id: 4,
-    nombre: "Bob",
-    edad: 4,
-    ciudad: "Rosario (2,5 km)",
-    sexo: "Macho",
-    foto: Bob,
-    especie: "Perro"
-  },
-  {
-    id: 5,
-    nombre: "Pia",
-    edad: 4,
-    ciudad: "Rosario (2,5 km)",
-    sexo: "Hembra",
-    foto: Pia,
-    especie: "Perro"
-  },
-  {
-    id: 6,
-    nombre: "Burko",
-    edad: 4,
-    ciudad: "Rosario (2,5 km)",
-    sexo: "Macho",
-    foto: Burko,
-    especie: "Perro"
-  },
-  {
-    id: 7,
-    nombre: "Nala",
-    edad: 4,
-    ciudad: "Rosario (2,5 km)",
-    sexo: "Hembra",
-    foto: Nala,
-    especie: "Perro"
-  },
-];
+
+// const animales = [
+//   {
+//     id: 1,
+//     nombre: "Garfield",
+//     edad: 4,
+//     ciudad: "Rosario (2,5 km)",
+//     sexo: "Macho",
+//     foto: Garfield,
+//     especie: "Gato"
+//   },
+//   {
+//     id: 2,
+//     nombre: "Tigri",
+//     edad: 4,
+//     ciudad: "Rosario (2,5 km)",
+//     sexo: "Hembra",
+//     foto: Tigri,
+//     especie: "Gato"
+//   },
+//   {
+//     id: 3,
+//     nombre: "Cira",
+//     edad: 4,
+//     ciudad: "Rosario (2,5 km)",
+//     sexo: "Hembra",
+//     foto: Cira,
+//     especie: "Gato"
+//   },
+//   {
+//     id: 4,
+//     nombre: "Bob",
+//     edad: 4,
+//     ciudad: "Rosario (2,5 km)",
+//     sexo: "Macho",
+//     foto: Bob,
+//     especie: "Perro"
+//   },
+//   {
+//     id: 5,
+//     nombre: "Pia",
+//     edad: 4,
+//     ciudad: "Rosario (2,5 km)",
+//     sexo: "Hembra",
+//     foto: Pia,
+//     especie: "Perro"
+//   },
+//   {
+//     id: 6,
+//     nombre: "Burko",
+//     edad: 4,
+//     ciudad: "Rosario (2,5 km)",
+//     sexo: "Macho",
+//     foto: Burko,
+//     especie: "Perro"
+//   },
+//   {
+//     id: 7,
+//     nombre: "Nala",
+//     edad: 4,
+//     ciudad: "Rosario (2,5 km)",
+//     sexo: "Hembra",
+//     foto: Nala,
+//     especie: "Perro"
+//   },
+// ];
 
 
 const HomeMascotero = () => {
 
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
   const [pets, setPets] = useState([]);
   const [protectors, setProtectors] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState([]);
@@ -117,9 +119,6 @@ const HomeMascotero = () => {
     setProtectors(response.data)
   }
 
-  const goToLogin = () => {
-    navigate("/");
-  };
 
   const handleFilterButtonClick = (selectedCategory) => {
     if (selectedFilters.includes(selectedCategory)) {
@@ -129,6 +128,10 @@ const HomeMascotero = () => {
       setSelectedFilters([...selectedFilters, selectedCategory]);
     }
   };
+
+  useEffect( ()=>{
+    console.log(user);
+  }, [])
 
   useEffect(() => {
     getPets();
@@ -281,7 +284,7 @@ const HomeMascotero = () => {
               (
                 <div className="d-flex protectors-container">
                   { 
-                    protectors.slice(0,4).map((protectora,id) => (
+                    protectoras.slice(0,4).map((protectora,id) => (
                       <ProtectorsCard protector={protectora} key={id}/>
                     ))
                   }
