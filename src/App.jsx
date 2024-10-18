@@ -12,6 +12,7 @@ import useOnboardingRedirect from './hooks/useOnboardingRedirect'
 import ProtectedRoute from './Routes/ProtectedRoute';
 import './app.css'
 import LoggedInProtect from './Routes/LoggedInProtect';
+import ProtectiveRegister from './components/ProtectiveRegister/ProtectiveRegister';
 
 function App() {
   useOnboardingRedirect();
@@ -21,6 +22,7 @@ function App() {
       <Route path="/" element={<Login />} />
       <Route path="/home" element={<Home />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/protective" element={<ProtectiveRegister />} />
       <Route path="/email-error" element={<EmailError />} />
       <Route path="/success-screen" element={<SuccessScreen />} /> 
       <Route path="/validation-register" element={<ValidationRegister />} /> 
