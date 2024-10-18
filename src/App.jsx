@@ -4,7 +4,6 @@ import React, { useContext, useEffect } from 'react';
 import HomeMascotero from './Pages/HomeMascotero';
 import HomeProtectora from './Pages/HomeProtectora';
 import Home from './Pages/Home';
-import Login from './Pages/Login/Login';
 import Register from './Pages/Register';
 import EmailError from './components/emailErrorScreen/EmailError';
 import ValidationRegister from './components/validationScreen/ValidationRegister';

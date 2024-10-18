@@ -10,11 +10,7 @@ const SuccessScreen = () => {
       <img 
           src={SuccessImg}
           alt="Dog peeking through paper" 
-          style={{ 
-            width: '100vw', 
-            height: '60vh', 
-            marginTop: "70px"
-          }}
+className='image'
         />
       </div>
       <h2 className="title">¡Qué bueno que estés acá!</h2>
@@ -25,7 +21,7 @@ const SuccessScreen = () => {
       </p>
 
       <div className="button-container">
-          <button className="button" onClick={() => navigate('/')}>
+          <button className="button" onClick={() => navigate('/home')}>
           Ir al login
           </button>
       </div>
